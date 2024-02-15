@@ -1,0 +1,84 @@
+.map {
+    max-width: 1200px;
+}
+.custom-control-label.btn-toggle:not(.active) {
+    background-color: white; 
+    border-color: #006400; 
+    color: #006400; 
+}
+
+
+.custom-control-label.btn-toggle.active {
+    background-color: #006400;
+    border-color: #006400; 
+    color: white; 
+}
+.modal {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 110px;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    overflow-y: auto;
+}
+.modal-content {
+    position: relative;
+    background-color: rgb(136, 245, 145);
+}
+/* .background-overlay {
+    position: fixed;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1;
+    display: none;
+} */
+.close-button {
+    position: absolute;
+    padding: 20px;
+
+}
+.open-button {
+    border-radius: 100%;
+    font-size: 25px;
+    top: 10px;
+    right: 10px;
+    border: none;
+    opacity: 80%;
+    z-index: 30;
+    cursor: pointer;
+}
+.leaflet-top.leaflet-right {
+    position: relative;
+}
+.card {
+    flex-direction:column;
+    align-items: flex-start;
+    background-color: rgb(188, 250, 193);
+}
+.flexbox {
+    flex-direction:column;
+    background-color: rgb(188, 250, 193);
+}
+.box {
+    padding: 10px;
+    margin-top: 5px;
+    width: 50px;
+    height: 10px;
+    border: 1px;
+    border-style: solid;
+
+}
+#rev {
+    background-color: #2AC7DD;
+}
+#partagee {
+    background-color:#84CA4B;
+}
+#protegee {
+    background-color:#025D29;
+}
+#polyvalent {
+    background-color:#B958D9;
+}

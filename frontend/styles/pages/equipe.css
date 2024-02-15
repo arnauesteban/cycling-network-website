@@ -1,0 +1,13 @@
+.team {
+    display: flex;
+    flex-direction:row;
+}
+.card {
+    padding: 10px;
+    margin: 10px;
+    background: linear-gradient(to bottom,#cc4c8e,#d99fbd);
+    opacity: 85%;
+}
+.team-photo {
+    height: 350px;
+}

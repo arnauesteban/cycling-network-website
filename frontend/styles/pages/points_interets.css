@@ -1,0 +1,64 @@
+.left-list {
+    max-width: 1200px;
+}
+.table {
+    max-height: 65vh;
+    overflow-y: scroll;
+}
+.btn
+{
+    background-color: rgb(50, 138, 16);
+}
+.btn:hover
+{
+    background-color: rgb(77, 205, 26);
+}
+.annulerBtn
+{
+    background-color: rgb(100, 100, 100);
+}
+tbody .selected
+{
+    background-color: rgb(50, 138, 16) !important;
+}
+.btn-group
+{
+    margin-right: 3vh;
+}
+.modal
+{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+}
+.modal-content {
+    width: 80%;
+    max-width: 650px;
+}
+#pop-up-modal 
+{
+    background-color: inherit;
+    border: none;
+}
+#pop-up-modal:hover {
+    background-color: inherit;
+}
+#mapModalContainer
+{
+    height: 500px;
+    width: 100%;
+}
+.close 
+{
+    font-size:medium;
+    font-weight: bold;
+}
+.modalTitle
+{
+    background-color: rgb(50, 138, 16);
+    text-align: left;
+    border-bottom: 1px solid;
+    padding: 15px;
+}

@@ -1,0 +1,76 @@
+{
+    "Root" : "/gti525/v1",
+    "Compteurs" : {
+        "routes" : [{
+            "url" : "/compteurs",
+            "type" : "GET",
+            "parameters" : ["limite", "page", "implantation", "nom"]
+        },
+        {
+            "url" : "/compteurs/:id",
+            "type" : "GET",
+            "parameters" : []
+        },
+        {
+            "url" : "/compteurs/:id/passages",
+            "type" : "GET",
+            "parameters" : ["debut", "fin", "intervalle"]
+        }]
+    },
+    "Points d'interets" : {
+        "routes" : [{
+            "url" : "/pointsdinteret",
+            "type" : "GET",
+            "parameters" : ["limite", "page", "type", "territoire", "nom"]
+        },
+        {
+            "url" : "/pointsdinteret/:id",
+            "type" : "GET",
+            "parameters" : []
+        },
+        {
+            "url" : "/pointsdinteret",
+            "type" : "POST",
+            "parameters" : [],
+            "body" : {
+                "nom_parc_lieu" : "",
+                "intersection" : "",
+                "arrondissement" : "",
+                "type" : "",
+                "latitude" : "",
+                "longitude" : "",
+                "remarque" : ""
+            }
+        },
+        {
+            "url" : "/pointsdinteret/:id",
+            "type" : "PATCH",
+            "parameters" : [],
+            "body" : {
+                "nom_parc_lieu" : "",
+                "intersection" : "",
+                "arrondissement" : "",
+                "type" : "",
+                "latitude" : "",
+                "longitude" : "",
+                "remarque" : ""
+            }
+        },
+        {
+            "url" : "/pointsdinteret/:id",
+            "type" : "DELETE"
+        }]
+    },
+    "Pistes" :{
+        "routes" : [{
+            "url" : "/pistes",
+            "type" : "GET",
+            "parameters" : ["populaireDebut", "populaireFin"]
+        },
+        {
+            "url" : "/pistes/:id",
+            "type" : "GET",
+            "parameters" : []
+        }]
+    }
+}

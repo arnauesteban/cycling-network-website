@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="/frontend/styles/index.css" rel="stylesheet" type="text/css">
+    <link href="/frontend/styles/pages/itineraire.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/frontend/scripts/pages/modal.js"></script>
+    <script src="/frontend/scripts/pages/fetch_data.js"></script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <title>Cycle Site</title>
+</head>
+<body>
+    <header class="container-fluid header" id="header">
+        <div class="title">
+            <a href="index.html">
+                <button type="button" class="image-button"></button>
+            </a>
+            <h1 id="company-name">LifeCycle</h1>
+        </div>
+        <div class="navigation">
+            <a href="itineraire.html" class="button-pressed" id="button-pressed">
+            <a href="itineraire.html" class="button-pressed" id="button-pressed">
+                <button class="button active">
+                    Itinéraires
+                </button>
+            </a>
+            <a href="statistiques.html">
+                <button class="button button-pressed">
+                    Statistiques
+                </button>
+            </a>
+            <div class="dropdown">
+                <a href="points_interets.html">
+                    <button class="button button-pressed dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Points d'intérêts
+                    </button>
+                </a>
+                
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="">one</a>
+                    <a class="dropdown-item" href="">two</a>
+                </div>
+            </div>
+        </div>
+        <div class="profileIcon">
+            
+        </div>
+    </header>
+
+    <div class="container-fluid principal">
+        <h1>Itinéraire</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Pistes et voies cyclabes</h2>
+                    <p>Le réseau cyclable de Montréal est composé de X km cyclables.</p>
+
+                    <div class="container">
+                        <form>
+                            <div class="form-group mb-3">
+                                <label>Réseaux</label>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="saisonnier" name="reseau" checked='checked'>
+                                    <label class="form-check-label" for="saisonnier">Saisonnier</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="4saisons" name="reseau">
+                                    <label class="form-check-label" for="4saisons">4 saisons</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label>Types de voies</label>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="voies_partagees" name="voies_partagees" checked= 'checked'>
+                                    <label class="form-check-label" for="voies_partagees">Voies partagées</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="voies_protegees" name="voies_protegees" checked= 'checked' >
+                                    <label class="form-check-label" for="voies_protegees">Voies protégées</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="date_initiale" class="col-sm-2 col-form-label">De:</label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control form-control-sm" id="date_initiale" name="date_initiale">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="date_finale" class="col-sm-2 col-form-label">À:</label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control form-control-sm" id="date_finale" name="date_finale">
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" id="search-button" onclick="updateData()">Chercher</button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="col-md-8 map">
+                    <div id="map" class="container mt-4" style="height: 400px;"></div>
+                    <span class="info-icon open-button" onclick="openModal()">&#9432;</span>
+                    
+                    <div class="modal" id="informationModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1> Légende </h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card" style="width: 30rem;">
+                                        <div class="box" id="rev"></div>
+                                        <h5>Le REV</h5>
+                                        <p>Ensemble de pistes cyclables protégées qui relie divers points d'intérêts sur l'ile de Montréal.</p>
+                                    </div>
+                                    <div class="card" style="width: 30rem;">
+                                        <div class="box" id="partagee"></div>
+                                        <h5>Voie partagée</h5>
+                                        <p>Des pistes distinctes, séparées ou des rues partagées par les cylistes et automobilistes</p>
+                                    </div>
+                                    <div class="card" style="width: 30rem;">
+                                        <div class="box" id="protegee"></div>
+                                        <h5>Voie protégée</h5>
+                                        <p>Une voie distincte, séparée par un élément physique de la circulation motorisée.</p>
+                                    </div>
+                                    <div class="card" style="width: 30rem;">
+                                        <div class="box" id="polyvalent"></div>
+                                        <h5>Sentier polyvalent</h5>
+                                        <p>Un chemin en dehors de la route ou le long de celle-ci, où ls piétons et les cyclistes peuvent circuler.</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Fermer</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+
+    <footer class="container-fluid footer">
+        <div class="footer-button-list">
+            <a href="https://www.facebook.com/" id="footer-link">
+                <button class="footer-button" id="facebook-button"></button>
+            </a>
+            <a href="https://www.instagram.com/" id="footer-link">
+                <button class="footer-button" id="instagram-button"></button>
+            </a>
+            <a href="https://www.twitter.com/" id="footer-link">
+                <button class="footer-button" id="twitter-button"></button>
+            </a>
+        </div>
+        <p name="copyright">&copy; 2023, GTI525 Groupe 02 - Équipe 05 </p>
+    </footer>
+    
+    
+    <script>
+        // Initialiser la carte, établir les coordonnées et le zoom
+        var map = L.map('map').setView([45.5017, -73.5700], 10);
+    
+        // Ajouter un fournisseur de cartes (ex: OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var infoIcon = L.divIcon({className: 'info-icon',html:'&#9432;'});
+        L.marker([45.5017, -73.5700], {icon: infoIcon}).addTo(map);
+    </script>
+    <script>jQuery(fetchData($));</script>
+</body>
+</html>
